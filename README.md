@@ -1,16 +1,16 @@
 # BizCardX: Extracting Business Card Data with OCR
 
-#Table of Contents:
->>About The Project
->>Getting Started
->>Prerequisites
->>Installation
->>Usage
->>Steps
->>Run
+>>Table of Contents:
+   >>About The Project
+   >>Getting Started
+   >>Prerequisites
+   >>Installation
+   >>Usage
+   >>Steps
+   >>Run
 
 
-#1.About The Project :
+>>1.About The Project :
    This project is focused on developing a Streamlit application that allows users to upload an image of a business card and 
    extract relevant information from it using 'pytesseract Python Module'. The extracted information should include the company 
    name, card holder name, designation, mobile number, email address, website URL, area, city, state, and pin code. The 
