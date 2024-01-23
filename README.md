@@ -1,6 +1,6 @@
 # BizCardX: Extracting Business Card Data with OCR
 
->>Table of Contents:
+Table of Contents:
    >>About The Project
    >>Getting Started
    >>Prerequisites
@@ -10,14 +10,14 @@
    >>Run
 
 
->>1.About The Project :
+1.About The Project :
    This project is focused on developing a Streamlit application that allows users to upload an image of a business card and 
    extract relevant information from it using 'pytesseract Python Module'. The extracted information should include the company 
    name, card holder name, designation, mobile number, email address, website URL, area, city, state, and pin code. The 
    extracted information should then be displayed in the application's graphical user interface (GUI).
 
 
-#2.Before starting we need to install certain python libraries.
+2.Before starting we need to install certain python libraries.
 
     PREREQUISITES :
     pytesseract
@@ -41,7 +41,7 @@
       pip install 
 
 
-#3. USAGE :
+3. USAGE :
     In this Project, I created a streamlit application that allows users to upload an image of a business card and extract 
     relevant information from it using easyOCR. The extracted information should include the company name, card holder name, 
     designation, mobile number, email address, website URL, area, city, state, and pin code.
@@ -51,7 +51,7 @@
     Update the data and Allow the user to delete the data through the streamlit UI
 
 
-#4. STEPS :
+4. STEPS :
     Import all the libraries that are used in this project.
     Created a Connection to MySQL Database
     Created streamlit interface sidebar
@@ -61,7 +61,7 @@
     Created a button to extract and upload the data to MySQL Database
     On Tab2 created dropdowns to modify the data in database or delete a card in database
     
-#5. RUN :
+5. RUN :
     To Run this project we need to go to terminal and change its path to file_loacted_directory
     Then run streamlit code to execute,
            streamlit run file_name.py
