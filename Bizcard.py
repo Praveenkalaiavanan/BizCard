@@ -5,6 +5,7 @@ import re
 import pymysql
 import streamlit as st
 from streamlit_option_menu import option_menu
+import os
 
 
 #pytesseract path extraction
@@ -32,38 +33,44 @@ cur.execute('''create table if not exists cards(
 # SIDEBAR ELEMENTS
 with st.sidebar:
     st.markdown("### :green[BizCardX - Extracting Business Card Data with OCR]")
-    st.caption('  - :black[**Image Processing**]')
-    st.caption('  - :black[**OCR**]')
-    st.caption('  - :black[**Python** Scripting]')
-    st.caption('  - :black[Data **Collection and Management**]')
-    st.caption('  - :black[**MySQL**]')
-    st.caption('  - :black[streamlit **GUI**]')
+    st.caption('  - :blue[**Image Processing**]')
+    st.caption('  - :blue[**OCR**]')
+    st.caption('  - :blue[**Python** Scripting]')
+    st.caption('  - :blue[Data **Collection and Management**]')
+    st.caption('  - :blue[**MySQL**]')
+    st.caption('  - :blue[streamlit **GUI**]')
 
 
 #optionmenu
 SELECT=option_menu(
     menu_title=None,
-    options=["","Extract Upload card","Delete & Modify"],
-    icons=["","upload","eraser"],
+    options=["Home","Extract Upload card","View And Modify"],
+    icons=["house","upload","eraser"],
     default_index=1,
     orientation="horizontal",
-    styles={"container":{"padding":"0!important","background-color":"green","size":"cover","width":"100%"},
+    styles={"container":{"padding":"0!important","background-color":"white","size":"cover","width":"100%"},
             "icon":{"color":"black","font-size":"20px"},
             "nav-link":{"font-size":"20px","test-align":"center","margin":"-2px","--hover-color":"#DCDCDC"},
-            "nav-link-selected":{"background-color":"#DCDCDC"}})
+            "nav-link-selected":{"background-color":"#0000FF"}})
 
 
 # Creating two tabs in streamlit interface
-tab1, tab2 = st.tabs(['Extract and Upload', 'View and Modify'])
+if SELECT == "Home":
+    st.image('Biz.jpg', caption='Business Card Data Extraction',width=600)
+    st.markdown("### :green[Overview:]")
+    st.subheader(':black[In this streamlit web app you can upload an image of a business card and extract relevant information from it using pytesseract.You can view ,modify or delete the extracted data in this app.This app would also allow user to save extracted information into a database along with the uploaded business card image.The database would be able to store multiple entries,each with its own business card image and extracted infromation.]')
+    st.markdown("### :green[Technologies Used:]")
+    st.subheader(' :black[Python ,Pytesseract,Streamlit,SQL,Pandas]')
+    
 
 # On Extract and Upload tab
-with tab1:
+if SELECT == "Extract Upload card":
     # upload image into streamlit interface
     upload = st.file_uploader("Upload a :orange[Business card] Image", type=['jpg', 'png'])
     if upload is not None:
         a, b = st.columns([2, 3])
         with a:
-            st.write('#### :green[You Have Uploaded a card]')
+            st.write('#### :blue[You Have Uploaded a card]')
         with b:
             st.image(upload)
         # Convert Image into text
@@ -180,11 +187,11 @@ with tab1:
                         cur.execute(query, tuple(j))
                         mydb.commit()
                         st.info('Data has been successfully inserted into MySql DataBase')
-                        st.balloons()
+                        st.toast('Your edited image was saved!', icon='😍')
 
 
 # On View and Modify tab
-with tab2:
+if SELECT == "View And Modify":
 
     # getting company name from sql
     cn = pd.read_sql_query("select CompanyName from cards", mydb)
@@ -228,7 +235,7 @@ with tab2:
                 Pincode="{pin}" where CompanyName="{selected}"''')
                 mydb.commit()
                 st.success("Changes Committed in DataBase")
-                st.balloons()
+                 st.toast('Your edited image was saved!', icon='😍')
 
     if st.button("View Modified Card"):
      updated = pd.read_sql_query(f'select * from cards where CompanyName="{selected}"', mydb)
